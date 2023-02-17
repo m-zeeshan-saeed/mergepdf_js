@@ -14,11 +14,11 @@ app.get("/", (req, res) => {
 
 app.post("/merge", upload.array("pdfs", 2), async (req, res, next) => {
   console.log(req.files);
-  await mergerpdf(
+  let d = await mergerpdf(
     path.join(__dirname, req.files[0].path),
     path.join(__dirname, req.files[1].path)
   );
-  res.redirect("http://localhost:3000/static/merged.pdf");
+  res.redirect(`http://localhost:3000/static/${d}.pdf`);
   // res.send({ data: req.files });
   // req.files is array of `photos` files
   // req.body will contain the text fields, if there were any
